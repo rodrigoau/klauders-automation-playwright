@@ -4,7 +4,8 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const UI_BASE_URL = process.env.UI_BASE_URL ?? "https://klauders.com/";
-const API_BASE_URL = process.env.API_BASE_URL ?? "https://klauders.com/automate-the-internet";
+const API_BASE_URL =
+  process.env.API_BASE_URL ?? "https://klauders.com/automate-the-internet";
 
 export default defineConfig({
   testDir: "./tests",

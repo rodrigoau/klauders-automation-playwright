@@ -1,5 +1,5 @@
-import { test as base } from '@playwright/test';
-import { AuthApi } from '@api/AuthApi';
+import { test as base } from "@playwright/test";
+import { AuthApi } from "@api/AuthApi";
 
 type Apis = { authApi: AuthApi };
 
@@ -9,4 +9,4 @@ export const test = base.extend<Apis>({
   },
 });
 
-export { expect } from '@playwright/test';
+export { expect } from "@playwright/test";
