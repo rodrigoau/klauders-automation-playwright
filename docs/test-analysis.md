@@ -10,11 +10,11 @@
 
 ### In scope
 
-- 
+-
 
 ### Out of scope
 
-- 
+-
 
 ---
 
@@ -59,12 +59,12 @@
 
 ## 5. Test Design Techniques Applied
 
-| Technique                 | Applied to | Example |
-| ------------------------- | ---------- | ------- |
-| Equivalence Partitioning  |            |         |
-| Boundary Value Analysis   |            |         |
-| Decision Table            |            |         |
-| State Transition          |            |         |
+| Technique                | Applied to | Example |
+| ------------------------ | ---------- | ------- |
+| Equivalence Partitioning |            |         |
+| Boundary Value Analysis  |            |         |
+| Decision Table           |            |         |
+| State Transition         |            |         |
 
 ---
 
@@ -88,12 +88,12 @@
 
 ## 8. Test Data & Environments
 
-| Item                 | Value                                                     |
-| -------------------- | --------------------------------------------------------- |
-| Base URL             | https://klauders.com/automate-the-internet?lang=en        |
-| Browsers / viewports | Chrome                                                    |
-| Test data source     | `accounts.json`                                           |
-| Secrets handling     |                                                           |
+| Item                 | Value                                              |
+| -------------------- | -------------------------------------------------- |
+| Base URL             | https://klauders.com/automate-the-internet?lang=en |
+| Browsers / viewports | Chrome                                             |
+| Test data source     | `accounts.json`                                    |
+| Secrets handling     |                                                    |
 
 ---
 
@@ -116,7 +116,7 @@
 
 ### Assumptions
 
-- 
+-
 
 ---
 
@@ -124,7 +124,7 @@
 
 ### Entry criteria
 
-- [ ] 
+- [ ]
 
 ### Exit criteria
 

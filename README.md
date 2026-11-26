@@ -6,15 +6,15 @@ The reasoning behind the stack is in [docs/test-strategy.md](docs/test-strategy.
 
 ## Tech stack
 
-| Area            | Tool                                                     |
-| --------------- | -------------------------------------------------------- |
-| Test runner     | [Playwright Test](https://playwright.dev)                |
-| Language        | TypeScript (strict mode)                                 |
+| Area            | Tool                                                      |
+| --------------- | --------------------------------------------------------- |
+| Test runner     | [Playwright Test](https://playwright.dev)                 |
+| Language        | TypeScript (strict mode)                                  |
 | Linting         | ESLint + `typescript-eslint` + `eslint-plugin-playwright` |
-| Formatting      | Prettier                                                 |
-| Git hooks       | Husky + lint-staged                                      |
-| Commit messages | Commitlint (Conventional Commits)                        |
-| CI              | GitHub Actions                                           |
+| Formatting      | Prettier                                                  |
+| Git hooks       | Husky + lint-staged                                       |
+| Commit messages | Commitlint (Conventional Commits)                         |
+| CI              | GitHub Actions                                            |
 
 ## Prerequisites
 
@@ -81,15 +81,15 @@ npx playwright show-report
 
 Defined in [tsconfig.json](tsconfig.json):
 
-| Alias         | Path               |
-| ------------- | ------------------ |
-| `@pages/*`    | `src/pages/*`      |
-| `@fixtures/*` | `src/fixtures/*`   |
-| `@utils/*`    | `src/utils/*`      |
-| `@data/*`     | `src/data/*`       |
+| Alias         | Path             |
+| ------------- | ---------------- |
+| `@pages/*`    | `src/pages/*`    |
+| `@fixtures/*` | `src/fixtures/*` |
+| `@utils/*`    | `src/utils/*`    |
+| `@data/*`     | `src/data/*`     |
 
 ```ts
-import { LoginPage } from '@pages/login.page';
+import { LoginPage } from "@pages/login.page";
 ```
 
 ## Configuration
@@ -115,7 +115,7 @@ Main settings in [playwright.config.ts](playwright.config.ts):
 
 - **Playwright Tests** ([playwright.yml](.github/workflows/playwright.yml)) runs on every push and pull request to `master`. The HTML report is uploaded as a build artifact and kept for 30 days.
 - **PR Checks** ([pr-checks.yml](.github/workflows/pr-checks.yml)) checks that the pull request description:
-  - includes the template sections *Description*, *Ticket*, *Screenshots* and *Checklist*
+  - includes the template sections _Description_, _Ticket_, _Screenshots_ and _Checklist_
   - has at least one screenshot attached
   - has every checklist item ticked
 
