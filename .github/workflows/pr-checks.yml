@@ -8,30 +8,30 @@ jobs:
   validate-pr-body:
     runs-on: ubuntu-latest
     steps:
-      - name: Validar template y screenshot
+      - name: Validate template and screenshot
         env:
           PR_BODY: ${{ github.event.pull_request.body }}
         run: |
           body="$(printf '%s' "$PR_BODY")"
           fail=0
 
-          # Secciones obligatorias del template
-          for section in "## Descripción" "## Ticket" "## Screenshots" "## Checklist"; do
+          # Required template sections
+          for section in "## Description" "## Ticket" "## Screenshots" "## Checklist"; do
             if ! grep -qF "$section" <<< "$body"; then
-              echo "::error::Falta la sección '$section' del template"
+              echo "::error::Missing template section '$section'"
               fail=1
             fi
           done
 
-          # Al menos una imagen (markdown o <img>)
+          # At least one image (markdown or <img>)
           if ! grep -qE '!\[[^]]*\]\(https?://[^)]+\)|<img[^>]+src=' <<< "$body"; then
-            echo "::error::Debes adjuntar al menos un screenshot"
+            echo "::error::You must attach at least one screenshot"
             fail=1
           fi
 
-          # Checklist completo
+          # Checklist fully completed
           if sed -n '/## Checklist/,$p' <<< "$body" | grep -q -- '- \[ \]'; then
-            echo "::error::Completa todos los puntos del checklist"
+            echo "::error::Complete every checklist item"
             fail=1
           fi
 
