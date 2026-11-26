@@ -12,6 +12,7 @@
     "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.65.1",
     "@types/node": "^26.6.11",
+    "dotenv": "^18.0.10",
     "eslint": "^10.15.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-playwright": "^2.12.2",
@@ -19,6 +20,7 @@
     "lint-staged": "^17.6.2",
     "prettier": "^3.10.1",
     "typescript": "~6.0.3",
-    "typescript-eslint": "^8.74.0"
+    "typescript-eslint": "^8.74.0",
+    "zod": "^4.6.7"
   }
 }
