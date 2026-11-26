@@ -113,7 +113,7 @@ Main settings in [playwright.config.ts](playwright.config.ts):
 
 ## CI/CD
 
-- **Playwright Tests** ([playwright.yml](.github/workflows/playwright.yml)) runs on every push and pull request to `master`/`main`. The HTML report is uploaded as a build artifact and kept for 30 days.
+- **Playwright Tests** ([playwright.yml](.github/workflows/playwright.yml)) runs on every push and pull request to `master`. The HTML report is uploaded as a build artifact and kept for 30 days.
 - **PR Checks** ([pr-checks.yml](.github/workflows/pr-checks.yml)) checks that the pull request description:
   - includes the template sections *Description*, *Ticket*, *Screenshots* and *Checklist*
   - has at least one screenshot attached
