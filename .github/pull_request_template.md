@@ -1,17 +1,17 @@
-## Descripción
-<!-- ¿Qué cambia y por qué? -->
+## Description
+<!-- What changes and why? -->
 
 ## Ticket
-<!-- Link a Jira / issue -->
+<!-- Link to Jira / issue -->
 
-## Tipo de cambio
+## Type of change
 - [ ] Feature
 - [ ] Bugfix
 - [ ] Refactor / tests
 
 ## Screenshots
-<!-- Arrastra aquí tu screenshot (obligatorio) -->
+<!-- Drag your screenshot here (required) -->
 
 ## Checklist
-- [ ] Probé localmente
-- [ ] Los tests pasan
+- [ ] Tested locally
+- [ ] Tests pass
