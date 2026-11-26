@@ -19,11 +19,11 @@ Key drivers:
 
 Alternatives considered:
 
-| Option | Pros | Cons |
-|---|---|---|
-| Selenium WebDriver + Java + RestAssured | Mature, widely known | Two tools for UI/API, manual waits, more boilerplate, slower setup |
-| Cypress + JavaScript | Good DX, popular | Limited multi-tab/multi-origin support, API testing is secondary, parallelization is paid (Cypress Cloud) |
-| **Playwright + TypeScript** | UI + API in one runner, auto-waiting, native parallelism, trace viewer, typed code | Smaller ecosystem than Selenium, team must know TypeScript |
+| Option                                  | Pros                                                                               | Cons                                                                                                      |
+| --------------------------------------- | ---------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| Selenium WebDriver + Java + RestAssured | Mature, widely known                                                               | Two tools for UI/API, manual waits, more boilerplate, slower setup                                        |
+| Cypress + JavaScript                    | Good DX, popular                                                                   | Limited multi-tab/multi-origin support, API testing is secondary, parallelization is paid (Cypress Cloud) |
+| **Playwright + TypeScript**             | UI + API in one runner, auto-waiting, native parallelism, trace viewer, typed code | Smaller ecosystem than Selenium, team must know TypeScript                                                |
 
 ## Decision
 
