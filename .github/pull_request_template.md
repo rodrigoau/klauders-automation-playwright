@@ -2,15 +2,16 @@
 <!-- What changes and why? -->
 
 ## Ticket
-<!-- Link to Jira / issue -->
+<!-- Jira key, e.g. AUT-123 (required) -->
 
 ## Type of change
 - [ ] Feature
 - [ ] Bugfix
 - [ ] Refactor / tests
+- [ ] Chore / config
 
 ## Screenshots
-<!-- Drag your screenshot here (required) -->
+<!-- Required for UI changes (Feature, or changes in src/pages/ or tests/e2e/, tests/ui/, tests/mobile/). Otherwise write "N/A". -->
 
 ## Checklist
 - [ ] Tested locally

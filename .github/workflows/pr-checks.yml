@@ -4,33 +4,72 @@ on:
   pull_request:
     types: [opened, edited, synchronize, reopened]
 
+permissions:
+  contents: read
+  pull-requests: read
+
 jobs:
   validate-pr-body:
     runs-on: ubuntu-latest
     steps:
-      - name: Validate template and screenshot
+      - name: Validate PR description
+        # Untrusted input is only passed through env vars, never interpolated
+        # with ${{ }} inside the script, to prevent script injection.
         env:
           PR_BODY: ${{ github.event.pull_request.body }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+          GH_TOKEN: ${{ github.token }}
         run: |
-          body="$(printf '%s' "$PR_BODY")"
+          # Normalize line endings and drop HTML comments (template placeholders)
+          body="$(printf '%s' "$PR_BODY" | tr -d '\r' | perl -0pe 's/<!--.*?-->//gs')"
           fail=0
 
-          # Required template sections
-          for section in "## Description" "## Ticket" "## Screenshots" "## Checklist"; do
-            if ! grep -qF "$section" <<< "$body"; then
-              echo "::error::Missing template section '$section'"
+          # Returns the content of a "## <name>" section, up to the next heading
+          section() {
+            awk -v h="## $1" '
+              $0 == h { found = 1; next }
+              found && /^## / { exit }
+              found { print }
+            ' <<< "$body"
+          }
+
+          # 1. Required template sections
+          for s in "Description" "Ticket" "Type of change" "Screenshots" "Checklist"; do
+            if ! grep -qxF "## $s" <<< "$body"; then
+              echo "::error::Missing template section '## $s'"
               fail=1
             fi
           done
 
-          # At least one image (markdown or <img>)
-          if ! grep -qE '!\[[^]]*\]\(https?://[^)]+\)|<img[^>]+src=' <<< "$body"; then
-            echo "::error::You must attach at least one screenshot"
+          # 2. Ticket must reference a Jira key like AUT-123
+          if ! section "Ticket" | grep -qE '\bAUT-[0-9]+\b'; then
+            echo "::error::The Ticket section must reference a ticket (e.g. AUT-123)"
             fail=1
           fi
 
-          # Checklist fully completed
-          if sed -n '/## Checklist/,$p' <<< "$body" | grep -q -- '- \[ \]'; then
+          # 3. Screenshot only required for UI changes:
+          #    "Feature" is checked, or the diff touches UI code.
+          needs_screenshot=0
+          if section "Type of change" | grep -qiE '^\s*- \[x\] Feature'; then
+            needs_screenshot=1
+            echo "Screenshot required: 'Feature' is checked"
+          fi
+          ui_files="$(gh api --paginate "repos/$REPO/pulls/$PR_NUMBER/files" --jq '.[].filename' \
+            | grep -E '^(src/pages/|tests/e2e/|tests/ui/|tests/mobile/)' || true)"
+          if [ -n "$ui_files" ]; then
+            needs_screenshot=1
+            echo "Screenshot required: the diff touches UI files:"
+            echo "$ui_files"
+          fi
+          if [ "$needs_screenshot" -eq 1 ] && \
+             ! section "Screenshots" | grep -qE '!\[[^]]*\]\(https?://[^)]+\)|<img[^>]+src='; then
+            echo "::error::UI change detected: attach at least one screenshot in the Screenshots section"
+            fail=1
+          fi
+
+          # 4. Checklist fully completed
+          if section "Checklist" | grep -qE '^\s*- \[ \]'; then
             echo "::error::Complete every checklist item"
             fail=1
           fi
