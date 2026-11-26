@@ -22,5 +22,4 @@ export class LoginPage extends BasePage {
     }
     await this.signInButton.click();
   }
-
 }
