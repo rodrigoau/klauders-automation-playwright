@@ -1,0 +1,38 @@
+name: PR Checks
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+
+jobs:
+  validate-pr-body:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validar template y screenshot
+        env:
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: |
+          body="$(printf '%s' "$PR_BODY")"
+          fail=0
+
+          # Secciones obligatorias del template
+          for section in "## Descripción" "## Ticket" "## Screenshots" "## Checklist"; do
+            if ! grep -qF "$section" <<< "$body"; then
+              echo "::error::Falta la sección '$section' del template"
+              fail=1
+            fi
+          done
+
+          # Al menos una imagen (markdown o <img>)
+          if ! grep -qE '!\[[^]]*\]\(https?://[^)]+\)|<img[^>]+src=' <<< "$body"; then
+            echo "::error::Debes adjuntar al menos un screenshot"
+            fail=1
+          fi
+
+          # Checklist completo
+          if sed -n '/## Checklist/,$p' <<< "$body" | grep -q -- '- \[ \]'; then
+            echo "::error::Completa todos los puntos del checklist"
+            fail=1
+          fi
+
+          exit $fail
